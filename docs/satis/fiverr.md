@@ -35,7 +35,11 @@ I will build python and ai automation workflows that run on schedule
 | Description | `One repetitive task automated with a Python script, plus usage notes` | `Multi-step automation with an AI service or API integration, code and docs` | `Cloud-scheduled system with retries and alerts, code, docs, 30-day support` |
 | Delivery | 3 days | 7 days | 14 days |
 | Revisions | 1 | 2 | 2 |
-| Price | $40 | $150 | $400 |
+| Price | $90 | $220 | $480 |
+
+Gerçekleşen (10-24): Fiverr bu kategoride paket başına **en az $90** istiyor; paketler Fiverr formuna göre
+`Single AI integration` / `AI-powered workflow` / `Full automated system`, kategori Programming & Tech → AI Development →
+AI Integrations, delivery type Application code, diller Python/TypeScript/SQL. Fine-tuning ve hızlı teslim ekstrası yok.
 
 **Description** (1059/1200):
 ```
