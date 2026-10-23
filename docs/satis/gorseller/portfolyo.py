@@ -90,7 +90,7 @@ def fatura():
 
 def sayim():
     xlsx = KOK / "calisma/portfolyo-sayim/cikti/2026-10-23-depo-sayim.xlsx"
-    tb, ws = tablo_html(xlsx, list(range(1, 10)) + [37, 38, 39, 40] + [58, 59, 60, 61])
+    tb, _ = tablo_html(xlsx, list(range(1, 10)) + [37, 38, 39, 40] + [58, 59, 60, 61])
     s = KOK / "calisma/portfolyo-sayim/sayfalar"
     s1 = veri_uri(s / "depo_sayim_taranmis_s1.png", (180, 150, 1500, 1880), 250)
     s2 = veri_uri(s / "depo_sayim_taranmis_s2.png", (180, 150, 1500, 1880), 250)
