@@ -15,6 +15,8 @@ dependencies = [
 [project.optional-dependencies]
 # Taramada ikinci okuma; ağır (torch), CI'da kurulmaz
 tarama = ["docling>=2.0", "easyocr>=1.7"]
+# Bionluk panel okuyucu (tezgah bionluk); makinedeki Playwright Chromium kullanılır
+bionluk = ["playwright>=1.48"]
 
 [project.scripts]
 tezgah = "tezgah.cli:app"

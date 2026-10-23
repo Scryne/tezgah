@@ -99,3 +99,29 @@ def defter_ozet():
     typer.echo(f"Yayın: {o.yayin or 'girilmedi'}" + (f" · {o.gun}. gün" if o.gun is not None else ""))
     if o.oldurme:
         typer.echo(f"ÖLDÜRME KRİTERİ: {OLDURME_GUN} günde sipariş yok, fiyat/paket/platform yeniden açılır.")
+
+
+bionluk_app = typer.Typer(no_args_is_help=True, help="Bionluk panelini salt-okunur okur")
+app.add_typer(bionluk_app, name="bionluk")
+
+
+@bionluk_app.command("giris")
+def bionluk_giris():
+    """Ayrı tarayıcı profilinde Bionluk giriş sayfasını açar; giriş yapıp pencereyi kapat."""
+    from . import bionluk
+
+    typer.echo("Açılan pencerede Bionluk'a giriş yap, sonra pencereyi kapat.")
+    bionluk.giris()
+    typer.echo("Oturum kaydedildi.")
+
+
+@bionluk_app.command("istekler")
+def bionluk_istekler():
+    """Bana Uygun Alıcı İstekleri sayfasını okuyup calisma/istekler/ altına yazar."""
+    from . import bionluk
+
+    try:
+        typer.echo(f"Kaydedildi: {bionluk.istekler()}")
+    except PermissionError as e:
+        typer.echo(str(e))
+        raise typer.Exit(1) from None
