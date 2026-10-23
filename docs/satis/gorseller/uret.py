@@ -1,7 +1,11 @@
 """İlan kapakları: HTML -> PNG (1280x720). Kanıt görselleri gerçek çıktıdan: S1 taranmış fatura + aynı faturanın tablosu."""
-import base64, io, json
+import base64
+import io
+import json
 from pathlib import Path
+
 from PIL import Image
+from playwright.sync_api import sync_playwright
 
 KOK = Path(__file__).resolve().parents[3]
 S1 = KOK / "spikes/s1-donusturme/veri"
@@ -92,7 +96,6 @@ def discord_html():
 </div><span class=damga>✓ 1 günde teslim</span></div>
 <div class=alt>/ban /at /sustur /temizle /uyar · bağlantı ve spam engeli</div></body>"""
 
-from playwright.sync_api import sync_playwright
 with sync_playwright() as p:
     b = p.chromium.launch(executable_path=str(Path.home() / "AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe"))
     for ad, html in [("kapak-donustur", donustur_html()), ("kapak-discord", discord_html())]:
