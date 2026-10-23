@@ -12,7 +12,7 @@ Durum sütunu session-start hook'u tarafından otomatik okunur — format bozulm
 | Faz | Adı | Durum | Bitti Kriteri |
 | --- | --- | --- | --- |
 | 0 | Spike S1: dönüştürme motoru | ✅ Tamamlandı | Bilinen cevaplı Türkçe test setinde motorlar ölçüldü, karar K-2 (`spikes/s1-donusturme/SONUC.md`) |
-| 1 | İskelet ve sağlık | 🔄 Devam Ediyor | uv projesi + `tezgah` CLI; CI (lint + test) yeşil; `.github/dependabot.yml`; repo GitHub'da (private, Scryne onayıyla) |
+| 1 | İskelet ve sağlık | ✅ Tamamlandı | uv projesi + `tezgah` CLI; CI (lint + test) yeşil; `.github/dependabot.yml`; repo GitHub'da (private, Scryne onayıyla) |
 | 2 | Dönüştürme kiti | ✅ Tamamlandı | `tezgah donustur` dijital PDF'i ve taramayı Excel/Word'e çeviriyor; S1 seti regresyon testi %100; bozuk okuma uyuşmazlık raporunda yakalanıyor; örnek çıktılar ilan görseline hazır |
 | 3 | Discord bot kiti | 🔄 Devam Ediyor | Ticket, kayıt, moderasyon modülleri bir test sunucusunda gerçekten çalıştı; `tezgah bot paketle` müşteri zip'ini + Türkçe rehberi üretiyor |
 | 4 | Satış malzemesi | ✅ Tamamlandı | İki Bionluk ilanı (3'er paket, kurallara uygun başlık), örnek görseller, sipariş kartı, mesaj şablonları, `tezgah defter` |
@@ -24,7 +24,7 @@ Durum sütunu session-start hook'u tarafından otomatik okunur — format bozulm
 
 ### Faz 1: İskelet ve sağlık
 - **İşler:** `pyproject.toml` (uv), `src/tezgah/` + typer CLI, pytest, ruff, GitHub Actions, dependabot (uv).
-- **Notlar:** GitHub reposu Scryne'ın onayını bekler. CI ve dependabot dosyaları yazıldı, ruff + pytest yerelde yeşil.
+- **Notlar:** private `Scryne/tezgah` (10-24), CI yeşil (`d72ad87`), Dependabot + güvenlik uyarıları açık. gh token'ında workflow kapsamı yok; push git credential manager ile.
 
 ### Faz 2: Dönüştürme kiti
 - **İşler:** sipariş klasörü düzeni; dijital/tarama ayrımı (metin katmanı var mı); pdfplumber çıkarımı; docling ikinci okuma;
