@@ -23,6 +23,7 @@ Scryne hesap sahibi olarak yazışır ve teslim eder. Fiverr'da n8n kurulum pake
 | K-6 | Barındırma satılmaz; teslim = paket + Türkçe kurulum rehberi; premium pakette müşterinin sunucusuna bir kerelik kurulum | Bionluk "sınırsız hosting" yasaklı; süregelen barındırma bakım yükü getirir |
 | K-7 | Kapsam dışı: ödev/tez, veri çekme botu, toplu veri, gri alan botlar | Bionluk yasaklı hizmetler listesi (destek/72, 2026-10-23 okundu); ödev talebi kibarca reddedilir |
 | K-8 | Başlangıç fiyatı düşük, 5 yorumdan sonra artar | Yorumsuz ilan satmıyor (Telegram bot ilanlarının 27/32'si yorumsuz) |
+| K-9 | Hedef ayda ≥10 bin TL (Scryne, 2026-10-24) → gelirin ana kolu özel projeler; paket ilanlar yorum toplar. Üçüncü ilan "Python ve yapay zekâ ile otomasyon" (750 / 3.000 / 7.500 TL), alıcı istekleri her gün taranır, Fiverr koşulsuz ve erken açılır | Paket siparişlerle ayda 10 sipariş ≈ 2–3 bin TL net; alıcı isteklerinde 5–15 bin TL bütçeli otomasyon işleri var. Bedeli: Scryne'a haftada birkaç saat yazışma |
 
 ## Teknoloji Stack
 

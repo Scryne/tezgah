@@ -96,9 +96,35 @@ def discord_html():
 </div><span class=damga>✓ 1 günde teslim</span></div>
 <div class=alt>/ban /at /sustur /temizle /uyar · bağlantı ve spam engeli</div></body>"""
 
+def otomasyon_html():
+    adimlar = [("Konu seçimi ve senaryo", "yapay zekâ", "12 sn"), ("Seslendirme", "Türkçe ses", "21 sn"),
+               ("Görsel ve kurgu", "9:16 video", "48 sn"), ("Kontrol", "süre, ses, altyazı", "3 sn"),
+               ("Planlı yayın", "takvime göre", "6 sn"), ("Bildirim", "Telegram", "1 sn")]
+    satir = "".join(f"<div class=adim><span class=tik>✓</span><b>{a}</b><i>{b}</i><em>{c}</em></div>" for a, b, c in adimlar)
+    return f"""<!doctype html><meta charset=utf-8>{ORTAK}<style>
+.sag{{position:relative}}
+.kart{{position:absolute;right:0;top:20px;width:560px;background:#151F2E;border:1px solid rgba(255,255,255,.08);border-radius:16px;
+ padding:22px 24px;box-shadow:0 24px 50px rgba(0,0,0,.5)}}
+.ust{{display:flex;justify-content:space-between;color:var(--soluk);font:600 14px Inter;margin-bottom:14px}}
+.ust b{{color:var(--murekkep)}}
+.adim{{display:grid;grid-template-columns:28px 1fr auto 60px;gap:12px;align-items:center;padding:11px 0;border-top:1px solid rgba(255,255,255,.06);font-size:16px}}
+.adim b{{font-weight:600}} .adim i{{font-style:normal;color:var(--soluk);font-size:14px}}
+.adim em{{font-style:normal;font-family:'JetBrains Mono';font-size:13px;color:var(--soluk);text-align:right}}
+.tik{{color:var(--dogru);font-weight:800}}
+.not{{margin-top:10px;font-size:12px;color:var(--soluk)}}
+.sag .damga{{position:absolute;right:0;bottom:0}}
+</style><body>
+<div><h1>İşinizi <em>otomatik</em> çalışan sisteme çeviriyorum</h1>
+<ul><li>Python ve yapay zekâ servisleri</li><li>Bulutta, zamanlanmış, bildirimli</li><li>Kaynak kod ve doküman sizde</li></ul></div>
+<div class=sag><div class=kart><div class=ust><b>Her gün 09:00 · otomatik</b><span>örnek akış</span></div>{satir}
+<div class=not>Hata olursa yeniden dener, düzelmezse haber verir.</div></div>
+<span class=damga>✓ Kapsam ve aylık gider baştan yazılı</span></div>
+<div class=alt>İçerik üretimi · ofis işleri · API bağlantıları · bildirim botları</div></body>"""
+
+
 with sync_playwright() as p:
     b = p.chromium.launch(executable_path=str(Path.home() / "AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe"))
-    for ad, html in [("kapak-donustur", donustur_html()), ("kapak-discord", discord_html())]:
+    for ad, html in [("kapak-donustur", donustur_html()), ("kapak-discord", discord_html()), ("kapak-otomasyon", otomasyon_html())]:
         (OUT / f"{ad}.html").write_text(html, encoding="utf-8")
         s = b.new_page(viewport={"width": 1280, "height": 720})
         s.goto((OUT / f"{ad}.html").as_uri()); s.wait_for_timeout(1500)

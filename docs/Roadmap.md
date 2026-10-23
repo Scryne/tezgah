@@ -18,7 +18,8 @@ Durum sütunu session-start hook'u tarafından otomatik okunur — format bozulm
 | 4 | Satış malzemesi | ✅ Tamamlandı | İki Bionluk ilanı (3'er paket, kurallara uygun başlık), örnek görseller, sipariş kartı, mesaj şablonları, `tezgah defter` |
 | 5 | Yayın (Scryne) | ✅ Tamamlandı | Scryne üyeliği açtı, IBAN girdi, iki ilan onaylandı ve yayında |
 | 6 | Gerçek kullanım | 🔄 Devam Ediyor | En az bir gerçek ücretli sipariş kitle teslim edildi, alıcı onayladı; 30 gün sonunda defter üzerinden karar |
-| 7 | Fiverr n8n paketi (koşullu) | ⏳ Bekliyor | Bionluk'ta 3 yorum sonrası: n8n kurulum kiti + gig + Payoneer yolu |
+| 7 | Fiverr (K-9: koşulsuz, erken) | ⏳ Bekliyor | Scryne hesap + kimlik + Payoneer; İngilizce otomasyon gig'i yayında; ilk çekim küçük tutarla denenmiş |
+| 8 | Özel proje hattı | 🔄 Devam Ediyor | Üçüncü ilan yayında; alıcı istekleri tarama skill'i (Chrome'dan okur, teklif yazar, gönderim Scryne'da) çalışıyor; ilk özel proje teslim edildi |
 
 ## Faz Detayları
 
