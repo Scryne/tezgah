@@ -8,6 +8,7 @@ from typing import Annotated
 import typer
 
 from .bot import paketle
+from .defter import OLDURME_GUN, Defter
 from .donustur import donustur as _donustur
 from .sayi import kucult
 
@@ -64,3 +65,37 @@ def bot(
         typer.echo(str(e))
         raise typer.Exit(1) from None
     typer.echo(f"Paket hazır: {zip_yolu}")
+
+
+defter_app = typer.Typer(no_args_is_help=True, help="Sipariş defteri (veri/defter.csv)")
+app.add_typer(defter_app, name="defter")
+DEFTER = Path.cwd() / "veri"
+
+
+@defter_app.command("ekle")
+def defter_ekle(
+    hizmet: Annotated[str, typer.Argument(help="donustur | discord")],
+    tutar: Annotated[float, typer.Argument(help="Alıcının ödediği TL")],
+    paket: Annotated[str, typer.Option(help="temel | standart | premium")] = "",
+    not_: Annotated[str, typer.Option("--not", help="Sipariş no, süre, sorun")] = "",
+):
+    """Teslim edilen siparişi deftere yazar (net = %20 komisyon düşülmüş)."""
+    s = Defter(DEFTER).ekle(hizmet, tutar, paket, not_)
+    typer.echo(f"Yazıldı: {s['tarih']} {hizmet} {s['tutar_tl']} TL (net {s['net_tl']})")
+
+
+@defter_app.command("yayin")
+def defter_yayin(tarih: Annotated[str, typer.Argument(help="İlanların yayına girdiği gün, YYYY-AA-GG")]):
+    """Öldürme kriterinin sayacını başlatır."""
+    Defter(DEFTER).yayin_ayarla(dt.date.fromisoformat(tarih))
+    typer.echo(f"Yayın tarihi {tarih}; {OLDURME_GUN} günde sipariş yoksa yön yeniden açılır.")
+
+
+@defter_app.command("ozet")
+def defter_ozet():
+    """Sipariş sayısı, brüt/net gelir, yayından beri gün ve öldürme kriteri."""
+    o = Defter(DEFTER).ozet()
+    typer.echo(f"Sipariş: {o.siparis} · brüt {o.brut:,.2f} TL · net {o.net:,.2f} TL")
+    typer.echo(f"Yayın: {o.yayin or 'girilmedi'}" + (f" · {o.gun}. gün" if o.gun is not None else ""))
+    if o.oldurme:
+        typer.echo(f"ÖLDÜRME KRİTERİ: {OLDURME_GUN} günde sipariş yok, fiyat/paket/platform yeniden açılır.")
