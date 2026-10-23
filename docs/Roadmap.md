@@ -18,7 +18,7 @@ Durum sütunu session-start hook'u tarafından otomatik okunur — format bozulm
 | 4 | Satış malzemesi | ✅ Tamamlandı | İki Bionluk ilanı (3'er paket, kurallara uygun başlık), örnek görseller, sipariş kartı, mesaj şablonları, `tezgah defter` |
 | 5 | Yayın (Scryne) | ✅ Tamamlandı | Scryne üyeliği açtı, IBAN girdi, iki ilan onaylandı ve yayında |
 | 6 | Gerçek kullanım | 🔄 Devam Ediyor | En az bir gerçek ücretli sipariş kitle teslim edildi, alıcı onayladı; 30 gün sonunda defter üzerinden karar |
-| 7 | Fiverr (K-9: koşulsuz, erken) | ⏳ Bekliyor | Scryne hesap + kimlik + Payoneer; İngilizce otomasyon gig'i yayında; ilk çekim küçük tutarla denenmiş |
+| 7 | Fiverr (K-9: koşulsuz, erken) | 🔄 Devam Ediyor | Scryne hesap + kimlik + Payoneer; İngilizce otomasyon gig'i yayında; ilk çekim küçük tutarla denenmiş |
 | 8 | Özel proje hattı | 🔄 Devam Ediyor | Üçüncü ilan yayında; alıcı istekleri tarama skill'i (Chrome'dan okur, teklif yazar, gönderim Scryne'da) çalışıyor; ilk özel proje teslim edildi |
 
 ## Faz Detayları
@@ -53,6 +53,7 @@ Durum sütunu session-start hook'u tarafından otomatik okunur — format bozulm
 ### Faz 6: Gerçek kullanım
 - **10-24:** ilk alıcı isteği teklifi: volkan847, "AI ile otomatik YouTube Shorts üretim/yayın sistemi" (bütçe 5–8 bin TL, 34 teklif), 6.500 TL / 14 gün, Discord ilanına bağlı. Kabul edilirse ayrı proje açılır (Türkçe TTS gerekiyor, Kokoro desteklemiyor; YouTube API audit'i yoksa Buffer yolu; GPU yok → lisanslı stok görsel). On istekten diğerleri elendi (donanım, Teknofest, belirsiz kapsam).
 - **10-24:** PDF portfolyosu yayında (Teknolojik Destek; "örnek çalışma" diye işaretli, iki görsel `portfolyo-*.png`, gerçek `tezgah donustur` çıktısından). Discord portfolyosu Scryne'ın ekran görüntülerine bağlı, açık.
+- **10-24 (Fiverr):** satıcı hesabı `@scryne` ("Scryne K.", Kurallar istisna 2) açıldı, ilk gig "build python and ai automation for your business" oluşturuldu (Programming & Tech → AI Development → AI Integrations, $90/$220/$480). Görünür olmak için Scryne'ın kimlik doğrulaması bekleniyor. Bionluk'ta üçüncü ilan (otomasyon) da yayında.
 - **10-24:** `tezgah bionluk istekler` + `istek-tara` skill'i çalışıyor (Google girişi otomasyon tarayıcısını reddetti; Bionluk'a e-posta + şifreyle girildi). İkinci teklif: dkubii "yapay zekâ ile iş takibi" (5.432 TL bütçe, 74 teklif), 5.000 TL / 7 gün, otomasyon ilanına bağlı.
 
 ### Faz 4: Satış malzemesi
