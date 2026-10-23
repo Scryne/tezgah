@@ -88,17 +88,20 @@ class Moderasyon(commands.Cog):
 
     @app_commands.command(name="ban", description="Üyeyi sunucudan yasaklar")
     async def ban(self, e: discord.Interaction, uye: discord.Member, sebep: str = "Belirtilmedi"):
+        await e.response.defer(ephemeral=True, thinking=True)
         await uye.ban(reason=f"{sebep} — {e.user}")
         await self._bitir(e, "Yasaklandı", f"{uye} — {sebep}")
 
     @app_commands.command(name="at", description="Üyeyi sunucudan atar")
     async def at(self, e: discord.Interaction, uye: discord.Member, sebep: str = "Belirtilmedi"):
+        await e.response.defer(ephemeral=True, thinking=True)
         await uye.kick(reason=f"{sebep} — {e.user}")
         await self._bitir(e, "Atıldı", f"{uye} — {sebep}")
 
     @app_commands.command(name="sustur", description="Üyeyi belirli dakika susturur")
     async def sustur(self, e: discord.Interaction, uye: discord.Member, dakika: app_commands.Range[int, 1, 40320],
                      sebep: str = "Belirtilmedi"):
+        await e.response.defer(ephemeral=True, thinking=True)
         await uye.timeout(dt.timedelta(minutes=dakika), reason=f"{sebep} — {e.user}")
         await self._bitir(e, "Susturuldu", f"{uye.mention} {dakika} dk — {sebep}")
 
@@ -111,6 +114,7 @@ class Moderasyon(commands.Cog):
 
     @app_commands.command(name="uyar", description="Üyeye uyarı verir; limitte 60 dk susturur")
     async def uyar(self, e: discord.Interaction, uye: discord.Member, sebep: str):
+        await e.response.defer(ephemeral=True, thinking=True)
         sayi = self.uyarilar.ekle(uye.id, sebep, str(e.user))
         ek = ""
         if sayi >= self.a.get("uyari_limiti", 3):
@@ -125,7 +129,7 @@ class Moderasyon(commands.Cog):
         await e.response.send_message(metin or "Uyarı yok.", ephemeral=True)
 
     async def _bitir(self, e: discord.Interaction, baslik: str, metin: str):
-        await e.response.send_message(f"{baslik}: {metin}", ephemeral=True)
+        await e.followup.send(f"{baslik}: {metin}", ephemeral=True)
         await self.bot.logla(baslik, f"{metin} — {e.user.mention}")
 
 

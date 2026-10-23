@@ -1,8 +1,10 @@
 """Tezgah Discord botu. Çalıştırma: python bot.py (ayrıntı KURULUM.md)."""
 import logging
 import os
+import socket
 import time
 
+import aiohttp
 import ayar as ayar_mod
 import discord
 from discord.ext import commands
@@ -19,6 +21,13 @@ class Bot(commands.Bot):
         intents.message_content = bool(ayar["moduller"].get("moderasyon", {}).get("acik"))  # link engeli
         super().__init__(command_prefix=commands.when_mentioned, intents=intents)
         self.ayar = ayar
+
+    async def login(self, token: str):
+        # Yalnız IPv4: AAAA kaydı olmayan ağlarda DNS her yeni bağlantıda ~12 sn bekliyor ve Discord'un 3 sn yanıt
+        # sınırı kaçıyor (2026-10-24 testi: AF_UNSPEC 11,6 sn, AF_INET 0,02 sn). ayar.yaml'da yalniz_ipv4: false ile kapanır.
+        if self.ayar.get("yalniz_ipv4", True):
+            self.http.connector = aiohttp.TCPConnector(family=socket.AF_INET, ttl_dns_cache=300, limit=0)
+        await super().login(token)
 
     async def setup_hook(self):
         for ad, yol in MODULLER.items():

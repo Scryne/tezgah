@@ -2,6 +2,7 @@
 sunucu_id: 0
 log_kanal_id: 0            # bot kayıtlarının düştüğü kanal (ticket dökümleri, kayıtlar, moderasyon)
 renk: "#5865F2"
+yalniz_ipv4: true         # bağlantı sorunu olmadıkça değiştirme
 
 moduller:
   ticket:

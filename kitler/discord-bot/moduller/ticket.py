@@ -58,6 +58,7 @@ class Ticket(commands.Cog):
         acik = self._acik_talepler(sunucu, uye.id)
         if len(acik) >= self.a.get("kisi_basi_limit", 1):
             return await e.response.send_message(f"Zaten açık bir talebin var: {acik[0].mention}", ephemeral=True)
+        await e.response.defer(ephemeral=True, thinking=True)  # Discord 3 sn içinde yanıt ister; iş uzun sürebilir
         kategori = sunucu.get_channel(self.a["kategori_id"])
         destek = sunucu.get_role(self.a["destek_rol_id"])
         izinler = {
@@ -71,7 +72,7 @@ class Ticket(commands.Cog):
                                                  topic=f"{ETIKET}{uye.id}")
         await kanal.send(self.a.get("karsilama", "{kullanici}").format(kullanici=uye.mention)
                          + (f" {destek.mention}" if destek else ""), view=Kapat(self))
-        await e.response.send_message(f"Talebin açıldı: {kanal.mention}", ephemeral=True)
+        await e.followup.send(f"Talebin açıldı: {kanal.mention}", ephemeral=True)
         await self.bot.logla("Talep açıldı", f"{uye.mention} → {kanal.mention}")
 
     async def kapat(self, e: discord.Interaction):
@@ -91,10 +92,11 @@ class Ticket(commands.Cog):
     @app_commands.command(name="ticket-panel", description="Bu kanala destek talebi panelini koyar")
     @app_commands.default_permissions(manage_guild=True)
     async def panel(self, e: discord.Interaction):
+        await e.response.defer(ephemeral=True, thinking=True)  # Discord 3 sn içinde yanıt ister; iş uzun sürebilir
         gom = discord.Embed(title=self.a.get("panel_baslik", "Destek"), description=self.a.get("panel_metin", ""),
                             color=ayar_mod.renk(self.bot.ayar))
         await e.channel.send(embed=gom, view=Panel(self))
-        await e.response.send_message("Panel kuruldu.", ephemeral=True)
+        await e.followup.send("Panel kuruldu.", ephemeral=True)
 
 
 async def setup(bot):

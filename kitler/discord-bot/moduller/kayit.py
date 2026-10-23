@@ -57,6 +57,7 @@ class Kayit(commands.Cog):
         if not yas_gecerli(yas, self.a.get("yas_alt_sinir", 13)):
             return await e.response.send_message(
                 f"Yaş {self.a.get('yas_alt_sinir', 13)} ile 99 arasında bir sayı olmalı.", ephemeral=True)
+        await e.response.defer(ephemeral=True, thinking=True)  # Discord 3 sn içinde yanıt ister; iş uzun sürebilir
         uye, sunucu = e.user, e.guild
         ad = takma_ad(self.a.get("takma_ad", "{isim} | {yas}"), isim, yas)
         try:
@@ -68,16 +69,17 @@ class Kayit(commands.Cog):
             await uye.remove_roles(kayitsiz, reason="Kayıt")
         if uye_rol:
             await uye.add_roles(uye_rol, reason="Kayıt")
-        await e.response.send_message(f"Kaydın tamam, hoş geldin {ad}!", ephemeral=True)
+        await e.followup.send(f"Kaydın tamam, hoş geldin {ad}!", ephemeral=True)
         await self.bot.logla("Kayıt", f"{uye.mention} → {ad}")
 
     @app_commands.command(name="kayit-panel", description="Bu kanala kayıt panelini koyar")
     @app_commands.default_permissions(manage_guild=True)
     async def panel(self, e: discord.Interaction):
+        await e.response.defer(ephemeral=True, thinking=True)  # Discord 3 sn içinde yanıt ister; iş uzun sürebilir
         gom = discord.Embed(title="Kayıt", description="Sunucuya erişmek için aşağıdaki düğmeyle kaydını tamamla.",
                             color=ayar_mod.renk(self.bot.ayar))
         await e.channel.send(embed=gom, view=Panel(self))
-        await e.response.send_message("Panel kuruldu.", ephemeral=True)
+        await e.followup.send("Panel kuruldu.", ephemeral=True)
 
 
 async def setup(bot):

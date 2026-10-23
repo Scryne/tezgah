@@ -98,3 +98,26 @@ def test_paket_ayarsiz_cikmaz_dolu_ayarla_cikar(tmp_path):
     assert "discord-bot/ayar.yaml" in adlar and "discord-bot/KURULUM.md" in adlar and "discord-bot/moduller/ticket.py" in adlar
     assert not any(".env" == Path(a).name or "__pycache__" in a for a in adlar)
     assert yaml.safe_load(z.read("discord-bot/ayar.yaml"))["sunucu_id"] == 100
+
+
+def test_baglanti_yalniz_ipv4(monkeypatch):
+    import socket
+
+    import bot as kit_bot
+    from discord.ext import commands
+
+    async def bos(self, token):
+        return None
+
+    monkeypatch.setattr(commands.Bot, "login", bos)
+
+    async def dene(ayar):
+        b = kit_bot.Bot(ayar)
+        await b.login("x")
+        aile = getattr(b.http.connector, "_family", None)
+        await b.close()
+        return aile
+
+    assert asyncio.run(dene(dolu_ayar())) == socket.AF_INET
+    kapali = {**dolu_ayar(), "yalniz_ipv4": False}
+    assert asyncio.run(dene(kapali)) is None
