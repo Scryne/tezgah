@@ -1,6 +1,7 @@
 """Tezgah Discord botu. Çalıştırma: python bot.py (ayrıntı KURULUM.md)."""
 import logging
 import os
+import time
 
 import ayar as ayar_mod
 import discord
@@ -48,7 +49,23 @@ def main():
         ayar = ayar_mod.oku()
     except ayar_mod.AyarHatasi as e:
         raise SystemExit(str(e)) from None
-    Bot(ayar).run(token, log_handler=None)
+    # Açılıştaki geçici bağlantı hatasında discord.py yeniden bağlanmadan çökebiliyor (gateway 503, 2026-10-24 testi):
+    # bot kendini yeniden başlatır. Token ve izin hataları düzelmeyeceği için hemen durur.
+    for deneme in range(1, 11):
+        try:
+            Bot(ayar).run(token, log_handler=None)
+            return
+        except discord.LoginFailure:
+            raise SystemExit("Token geçersiz: Developer Portal > Bot > Reset Token ile yenisini al, .env'e yaz.") from None
+        except discord.PrivilegedIntentsRequired:
+            raise SystemExit("Developer Portal > Bot sayfasında Server Members ve Message Content intent'lerini aç.") from None
+        except KeyboardInterrupt:
+            return
+        except Exception:
+            bekle = min(60, 5 * deneme)
+            log.exception("Bağlantı koptu, %d sn sonra yeniden deneniyor (%d/10)", bekle, deneme)
+            time.sleep(bekle)
+    raise SystemExit("10 denemede bağlanılamadı; internet bağlantısını kontrol et.")
 
 
 if __name__ == "__main__":
