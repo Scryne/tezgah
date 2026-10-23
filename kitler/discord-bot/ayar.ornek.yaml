@@ -1,0 +1,30 @@
+# Kimlikleri almak için: Discord > Ayarlar > Gelişmiş > Geliştirici Modu açık; kanal/rol/sunucuya sağ tık > "ID'yi Kopyala".
+sunucu_id: 0
+log_kanal_id: 0            # bot kayıtlarının düştüğü kanal (ticket dökümleri, kayıtlar, moderasyon)
+renk: "#5865F2"
+
+moduller:
+  ticket:
+    acik: true
+    kategori_id: 0         # destek kanallarının açılacağı kategori
+    destek_rol_id: 0       # destek kanallarını görecek ekip rolü
+    panel_baslik: "Destek"
+    panel_metin: "Bir sorunun mu var? Aşağıdaki düğmeyle destek talebi aç, ekibimiz yardımcı olsun."
+    karsilama: "{kullanici} hoş geldin! Sorununu yaz, ekibimiz birazdan burada olacak."
+    kisi_basi_limit: 1     # bir kişinin aynı anda açabileceği talep sayısı
+
+  kayit:
+    acik: true
+    kayitsiz_rol_id: 0     # sunucuya girene verilen rol (yalnız kayıt kanalını görür)
+    uye_rol_id: 0          # kayıt olunca verilen rol
+    hosgeldin_kanal_id: 0
+    hosgeldin_mesaji: "{kullanici} sunucumuza hoş geldin! Kayıt kanalından kaydını tamamla."
+    takma_ad: "{isim} | {yas}"
+    yas_alt_sinir: 13
+
+  moderasyon:
+    acik: true
+    yetkili_rol_id: 0      # moderasyon komutlarını kullanabilecek rol
+    link_engeli: true      # yetkili olmayanların bağlantılarını siler
+    spam: { mesaj: 5, saniye: 5, sustur_dakika: 10 }
+    uyari_limiti: 3        # bu kadar uyarıda 60 dk susturma

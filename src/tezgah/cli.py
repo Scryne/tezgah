@@ -7,6 +7,7 @@ from typing import Annotated
 
 import typer
 
+from .bot import paketle
 from .donustur import donustur as _donustur
 from .sayi import kucult
 
@@ -49,3 +50,17 @@ def donustur(
         typer.echo(f"INCELE: {len(s.bulgular)} bulgu, ayrıntı {klasor / 'rapor.md'}. Teslim dosyası yazılmadı.")
         raise typer.Exit(1)
     typer.echo("TEMIZ: " + ", ".join(str(p) for p in s.ciktilar))
+
+
+@app.command()
+def bot(
+    ayar: Annotated[Path, typer.Argument(help="Müşterinin doldurulmuş ayar.yaml'ı (şablon: kitler/discord-bot/ayar.ornek.yaml)")],
+    cikti: Annotated[Path | None, typer.Option(help="Zip'in yazılacağı klasör (varsayılan: ayarın klasörü)")] = None,
+):
+    """Discord bot kitini müşteriye özel ayarla zip'ler."""
+    try:
+        zip_yolu = paketle(ayar, cikti or ayar.parent)
+    except ValueError as e:
+        typer.echo(str(e))
+        raise typer.Exit(1) from None
+    typer.echo(f"Paket hazır: {zip_yolu}")
