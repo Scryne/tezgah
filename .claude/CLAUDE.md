@@ -29,3 +29,10 @@ değiştirilmez. Kanonik roadmap `docs/Roadmap.md` dışında bir dosyaysa `stat
 
 Taban disiplin ve araç sırası global `frontend-sistemi` skill'inde (burada tekrarlanmaz; UI işinden önce yükle). Projeye
 özel karakteri kökteki `DESIGN.md` belirler ve çelişkide global varsayılanı ezer.
+
+## Komutlar
+
+- `uv sync --group dev --extra tarama` — kurulum (docling'li; CI `--extra tarama`sız koşar)
+- `uv run tezgah yeni <ad>` / `uv run tezgah donustur calisma/<klasor> [--word]` — sipariş akışı, ayrıntı `.claude/skills/donustur`
+- `uv run ruff check . && uv run pytest -q` — CI ile aynı
+- Müşteri belgeleri `calisma/` altında yaşar, repoya girmez.

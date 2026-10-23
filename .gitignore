@@ -23,3 +23,8 @@ __pycache__/
 .DS_Store
 .vscode/*
 !.vscode/extensions.json
+
+# Müşteri belgeleri repoya girmez
+calisma/
+.ruff_cache/
+.pytest_cache/

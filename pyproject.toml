@@ -1,0 +1,36 @@
+[project]
+name = "tezgah"
+version = "0.1.0"
+description = "Freelance teslim kitleri: PDF/tarama -> Excel/Word, Discord bot paketi"
+requires-python = ">=3.12"
+dependencies = [
+    "typer>=0.12",
+    "pdfplumber>=0.11",
+    "pypdfium2>=4.30",
+    "openpyxl>=3.1",
+    "python-docx>=1.1",
+]
+
+[project.optional-dependencies]
+# Taramada ikinci okuma; ağır (torch), CI'da kurulmaz
+tarama = ["docling>=2.0", "easyocr>=1.7"]
+
+[project.scripts]
+tezgah = "tezgah.cli:app"
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tezgah"]
+
+[tool.ruff]
+line-length = 120
+extend-exclude = ["spikes"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
