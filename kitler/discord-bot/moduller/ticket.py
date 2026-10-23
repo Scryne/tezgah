@@ -1,5 +1,6 @@
 """Destek talebi: panel düğmesi özel kanal açar, kapatınca döküm log kanalına düşer ve kanal silinir."""
 import asyncio
+import datetime as dt
 import io
 import re
 
@@ -14,6 +15,11 @@ ETIKET = "tezgah-ticket:"  # kanal konusunda sahibin kimliği; yeniden başlatma
 def kanal_adi(kullanici_adi: str) -> str:
     temiz = re.sub(r"[^a-z0-9-]+", "-", kullanici_adi.lower()).strip("-") or "kullanici"
     return f"destek-{temiz}"[:90]
+
+
+def zaman(an: dt.datetime, dilim: dt.tzinfo | None = None) -> str:
+    """Discord zamanı UTC gelir; dökümde botun çalıştığı makinenin saatiyle yazılır."""
+    return an.astimezone(dilim).strftime("%Y-%m-%d %H:%M")
 
 
 def dokum(mesajlar: list[tuple[str, str, str]]) -> str:
@@ -82,7 +88,7 @@ class Ticket(commands.Cog):
         if str(e.user.id) != sahip and destek not in getattr(e.user, "roles", []):
             return await e.response.send_message("Bu talebi yalnız sahibi ya da destek ekibi kapatabilir.", ephemeral=True)
         await e.response.send_message("Talep 5 saniye içinde kapanıyor, döküm kaydedildi.")
-        mesajlar = [(m.created_at.strftime("%Y-%m-%d %H:%M"), m.author.display_name, m.clean_content)
+        mesajlar = [(zaman(m.created_at), m.author.display_name, m.clean_content)
                     async for m in kanal.history(limit=None, oldest_first=True)]
         dosya = discord.File(io.BytesIO(dokum(mesajlar).encode("utf-8")), filename=f"{kanal.name}.txt")
         await self.bot.logla("Talep kapandı", f"{kanal.name} — kapatan {e.user.mention}", dosya)

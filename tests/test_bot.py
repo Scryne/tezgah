@@ -12,7 +12,7 @@ sys.path.insert(0, str(KIT))
 import ayar as kit_ayar
 from moduller.kayit import takma_ad, yas_gecerli
 from moduller.moderasyon import SpamSayaci, Uyarilar, link_var
-from moduller.ticket import dokum, kanal_adi
+from moduller.ticket import dokum, kanal_adi, zaman
 
 
 def dolu_ayar():
@@ -121,3 +121,9 @@ def test_baglanti_yalniz_ipv4(monkeypatch):
     assert asyncio.run(dene(dolu_ayar())) == socket.AF_INET
     kapali = {**dolu_ayar(), "yalniz_ipv4": False}
     assert asyncio.run(dene(kapali)) is None
+
+
+def test_dokum_saati_yerel():
+    import datetime as dt
+    utc = dt.datetime(2026, 10, 23, 22, 13, tzinfo=dt.UTC)
+    assert zaman(utc, dt.timezone(dt.timedelta(hours=3))) == "2026-10-24 01:13"

@@ -14,7 +14,7 @@ Durum sütunu session-start hook'u tarafından otomatik okunur — format bozulm
 | 0 | Spike S1: dönüştürme motoru | ✅ Tamamlandı | Bilinen cevaplı Türkçe test setinde motorlar ölçüldü, karar K-2 (`spikes/s1-donusturme/SONUC.md`) |
 | 1 | İskelet ve sağlık | ✅ Tamamlandı | uv projesi + `tezgah` CLI; CI (lint + test) yeşil; `.github/dependabot.yml`; repo GitHub'da (private, Scryne onayıyla) |
 | 2 | Dönüştürme kiti | ✅ Tamamlandı | `tezgah donustur` dijital PDF'i ve taramayı Excel/Word'e çeviriyor; S1 seti regresyon testi %100; bozuk okuma uyuşmazlık raporunda yakalanıyor; örnek çıktılar ilan görseline hazır |
-| 3 | Discord bot kiti | 🔄 Devam Ediyor | Ticket, kayıt, moderasyon modülleri bir test sunucusunda gerçekten çalıştı; `tezgah bot paketle` müşteri zip'ini + Türkçe rehberi üretiyor |
+| 3 | Discord bot kiti | ✅ Tamamlandı | Ticket, kayıt, moderasyon modülleri bir test sunucusunda gerçekten çalıştı; `tezgah bot paketle` müşteri zip'ini + Türkçe rehberi üretiyor |
 | 4 | Satış malzemesi | ✅ Tamamlandı | İki Bionluk ilanı (3'er paket, kurallara uygun başlık), örnek görseller, sipariş kartı, mesaj şablonları, `tezgah defter` |
 | 5 | Yayın (Scryne) | ⏳ Bekliyor | Scryne üyeliği açtı, IBAN girdi, iki ilan onaylandı ve yayında |
 | 6 | Gerçek kullanım | ⏳ Bekliyor | En az bir gerçek ücretli sipariş kitle teslim edildi, alıcı onayladı; 30 gün sonunda defter üzerinden karar |
@@ -39,6 +39,12 @@ Durum sütunu session-start hook'u tarafından otomatik okunur — format bozulm
   (Discord geliştirici portalı, bir kerelik).
 - **Durum (10-24):** kit (`kitler/discord-bot`, discord.py 2.7.1) + `tezgah bot <ayar.yaml>` paketleme + Türkçe KURULUM.md + 9 test
   (modüller bota yükleniyor, 8 komut kayıtlı, eksik kimlikle paket çıkmıyor). Kalan: gerçek test sunucusunda çalıştırma (token Scryne'da).
+- **Gerçek sunucu testi (10-24):** müşteri paketi birebir açılıp kuruldu (`scripts/test_sunucu_kur.py` rol/kanal açar, ayarı yazar);
+  Scryne ticket aç/kapat, kayıt formu, /temizle, /uyar'ı denedi, hepsi çalıştı, `#bot-log`'a düştü, bot logunda hata 0.
+- **Öğrenilen (üç kusur, düzeltildi):** (1) açılışta gateway 503'te discord.py yeniden bağlanmadan çöküyor → `main` 10 deneme;
+  (2) boşta kalan botun ilk isteği AAAA DNS'te 11,6 sn bekleyip 3 sn sınırını kaçırdı ("Uygulama yanıt vermedi") → yalnız IPv4 +
+  her etkileşimde önce defer; (3) döküm saatleri UTC'ydi → yerel saat. Kaçırılan: yeni üye girişi (kayıtsız rolü, hoş geldin) ve
+  bağlantı engeli sahibin hesabıyla sınanamadı; ilk gerçek siparişte alıcının sunucusunda izlenir.
 
 ### Faz 4: Satış malzemesi
 - **İşler:** ilan metinleri ("Ben … fiil" başlık, iletişim bilgisi yok), paket fiyatları (K-8), örnek önce/sonra görselleri,
