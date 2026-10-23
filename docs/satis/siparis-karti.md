@@ -24,3 +24,10 @@ her adımda ne diyeceğin aşağıda yazıyor.
 ## Teslimden sonra
 - Alıcı 3 gün içinde onaylamazsa sipariş otomatik onaylanır.
 - Onaydan sonra yorum isteği mesajı (bir kez, ısrar yok).
+
+## Alıcı isteğine teklif (Bana Uygun Alıcı İstekleri)
+- Teklif Ver → **ÖZEL SİPARİŞ** (min 100 TL; 100 TL ve üstünde alıcı yorum ve puan verebilir).
+- Teklif bir ilana bağlanmak zorunda: isteğin kategorisine en yakın ilanı seç (Diğer Yazılım Teknoloji → Discord ilanı).
+- Mesaj en fazla **600 karakter**; süre gün olarak. Uzun açıklama kabul sonrası mesajlaşmaya kalır.
+- Teklif verme: ödev, öğrenci yarışma projesi (Teknofest vb.), donanım/elektronik, sürekli saatlik destek.
+- Ekran görüntüsünü Claude'a at, isteği değerlendirip metni yazar.

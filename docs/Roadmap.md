@@ -49,6 +49,9 @@ Durum sütunu session-start hook'u tarafından otomatik okunur — format bozulm
 ### Faz 5: Yayın
 - **10-24:** üyelik + IBAN tamam; PDF→Excel ilanı Teknolojik Destek'te onaylandı ve yayında (başlık 60 karakter sınırına göre kısaltıldı). Sayaç 10-24. Discord ilanı da aynı gün yayında (Diğer Yazılım Teknoloji, başlık 53 karakter). Öldürme kontrolü 11-23.
 
+### Faz 6: Gerçek kullanım
+- **10-24:** ilk alıcı isteği teklifi: volkan847, "AI ile otomatik YouTube Shorts üretim/yayın sistemi" (bütçe 5–8 bin TL, 34 teklif), 6.500 TL / 14 gün, Discord ilanına bağlı. Kabul edilirse ayrı proje açılır (Türkçe TTS gerekiyor, Kokoro desteklemiyor; YouTube API audit'i yoksa Buffer yolu; GPU yok → lisanslı stok görsel). On istekten diğerleri elendi (donanım, Teknofest, belirsiz kapsam).
+
 ### Faz 4: Satış malzemesi
 - **İşler:** ilan metinleri ("Ben … fiil" başlık, iletişim bilgisi yok), paket fiyatları (K-8), örnek önce/sonra görselleri,
   sipariş kartı (adım adım), mesaj şablonları (karşılama, gereksinim, teslim, yorum isteği, ödev reddi), defter CSV.
