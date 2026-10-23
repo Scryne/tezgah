@@ -53,6 +53,7 @@ Durum sütunu session-start hook'u tarafından otomatik okunur — format bozulm
 ### Faz 6: Gerçek kullanım
 - **10-24:** ilk alıcı isteği teklifi: volkan847, "AI ile otomatik YouTube Shorts üretim/yayın sistemi" (bütçe 5–8 bin TL, 34 teklif), 6.500 TL / 14 gün, Discord ilanına bağlı. Kabul edilirse ayrı proje açılır (Türkçe TTS gerekiyor, Kokoro desteklemiyor; YouTube API audit'i yoksa Buffer yolu; GPU yok → lisanslı stok görsel). On istekten diğerleri elendi (donanım, Teknofest, belirsiz kapsam).
 - **10-24:** PDF portfolyosu yayında (Teknolojik Destek; "örnek çalışma" diye işaretli, iki görsel `portfolyo-*.png`, gerçek `tezgah donustur` çıktısından). Discord portfolyosu Scryne'ın ekran görüntülerine bağlı, açık.
+- **10-24:** `tezgah bionluk istekler` + `istek-tara` skill'i çalışıyor (Google girişi otomasyon tarayıcısını reddetti; Bionluk'a e-posta + şifreyle girildi). İkinci teklif: dkubii "yapay zekâ ile iş takibi" (5.432 TL bütçe, 74 teklif), 5.000 TL / 7 gün, otomasyon ilanına bağlı.
 
 ### Faz 4: Satış malzemesi
 - **İşler:** ilan metinleri ("Ben … fiil" başlık, iletişim bilgisi yok), paket fiyatları (K-8), örnek önce/sonra görselleri,
