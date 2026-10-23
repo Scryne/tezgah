@@ -16,8 +16,8 @@ Durum sütunu session-start hook'u tarafından otomatik okunur — format bozulm
 | 2 | Dönüştürme kiti | ✅ Tamamlandı | `tezgah donustur` dijital PDF'i ve taramayı Excel/Word'e çeviriyor; S1 seti regresyon testi %100; bozuk okuma uyuşmazlık raporunda yakalanıyor; örnek çıktılar ilan görseline hazır |
 | 3 | Discord bot kiti | ✅ Tamamlandı | Ticket, kayıt, moderasyon modülleri bir test sunucusunda gerçekten çalıştı; `tezgah bot paketle` müşteri zip'ini + Türkçe rehberi üretiyor |
 | 4 | Satış malzemesi | ✅ Tamamlandı | İki Bionluk ilanı (3'er paket, kurallara uygun başlık), örnek görseller, sipariş kartı, mesaj şablonları, `tezgah defter` |
-| 5 | Yayın (Scryne) | 🔄 Devam Ediyor | Scryne üyeliği açtı, IBAN girdi, iki ilan onaylandı ve yayında |
-| 6 | Gerçek kullanım | ⏳ Bekliyor | En az bir gerçek ücretli sipariş kitle teslim edildi, alıcı onayladı; 30 gün sonunda defter üzerinden karar |
+| 5 | Yayın (Scryne) | ✅ Tamamlandı | Scryne üyeliği açtı, IBAN girdi, iki ilan onaylandı ve yayında |
+| 6 | Gerçek kullanım | 🔄 Devam Ediyor | En az bir gerçek ücretli sipariş kitle teslim edildi, alıcı onayladı; 30 gün sonunda defter üzerinden karar |
 | 7 | Fiverr n8n paketi (koşullu) | ⏳ Bekliyor | Bionluk'ta 3 yorum sonrası: n8n kurulum kiti + gig + Payoneer yolu |
 
 ## Faz Detayları
@@ -47,7 +47,7 @@ Durum sütunu session-start hook'u tarafından otomatik okunur — format bozulm
   bağlantı engeli sahibin hesabıyla sınanamadı; ilk gerçek siparişte alıcının sunucusunda izlenir.
 
 ### Faz 5: Yayın
-- **10-24:** üyelik + IBAN tamam; PDF→Excel ilanı Teknolojik Destek'te onaylandı ve yayında (başlık 60 karakter sınırına göre kısaltıldı). Sayaç 10-24. Sırada Discord ilanı.
+- **10-24:** üyelik + IBAN tamam; PDF→Excel ilanı Teknolojik Destek'te onaylandı ve yayında (başlık 60 karakter sınırına göre kısaltıldı). Sayaç 10-24. Discord ilanı da aynı gün yayında (Diğer Yazılım Teknoloji, başlık 53 karakter). Öldürme kontrolü 11-23.
 
 ### Faz 4: Satış malzemesi
 - **İşler:** ilan metinleri ("Ben … fiil" başlık, iletişim bilgisi yok), paket fiyatları (K-8), örnek önce/sonra görselleri,
