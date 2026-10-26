@@ -4,9 +4,11 @@ Yalnız okur: teklif, mesaj, tıklama-ile-işlem yok. Günde birkaç okumayla s�
 import datetime as dt
 from pathlib import Path
 
+from . import proje_koku
+
 ISTEKLER = "https://bionluk.com/panel/alici-istekleri"
-PROFIL = Path.cwd() / "calisma" / ".bionluk-profil"  # gitignore'da; oturum çerezleri burada
-KAYIT = Path.cwd() / "calisma" / "istekler"
+PROFIL = proje_koku() / "calisma" / ".bionluk-profil"  # gitignore'da; oturum çerezleri burada
+KAYIT = proje_koku() / "calisma" / "istekler"
 
 
 def _chromium() -> str | None:

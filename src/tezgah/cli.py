@@ -7,6 +7,7 @@ from typing import Annotated
 
 import typer
 
+from . import proje_koku
 from .bot import paketle
 from .defter import OLDURME_GUN, Defter
 from .donustur import donustur as _donustur
@@ -20,7 +21,7 @@ for _akis in (sys.stdout, sys.stderr):
         _akis.reconfigure(encoding="utf-8", errors="replace")
 
 app = typer.Typer(no_args_is_help=True, add_completion=False, help="Tezgah: freelance teslim kitleri")
-KOK = Path.cwd() / "calisma"
+KOK = proje_koku() / "calisma"
 
 
 @app.command()
@@ -69,7 +70,7 @@ def bot(
 
 defter_app = typer.Typer(no_args_is_help=True, help="Sipariş defteri (veri/defter.csv)")
 app.add_typer(defter_app, name="defter")
-DEFTER = Path.cwd() / "veri"
+DEFTER = proje_koku() / "veri"
 
 
 @defter_app.command("ekle")

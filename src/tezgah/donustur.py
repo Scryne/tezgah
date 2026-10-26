@@ -42,11 +42,16 @@ def donustur(klasor: Path, word: bool = False, ikinci_okuma: bool = True) -> Son
     if goruntuler:
         okunan = {(t["kaynak"], t["sayfa"]) for t in claude.get("tablolar", [])}
         bekleyen = [g for g in goruntuler if okuma.kaynak_ve_sayfa(g) not in okunan]
-        if ikinci_okuma and not (klasor / DOCLING).exists():
+        adlar = [g.name for g in goruntuler]
+        # girdi değiştiyse (yeni sayfa) eski ikinci okuma bayat kalmasın; eski kayıtta sayfa listesi yoksa geçerli say
+        kayitli = okuma.json_oku(klasor / DOCLING).get("sayfalar")
+        if ikinci_okuma and (not (klasor / DOCLING).exists() or (kayitli is not None and kayitli != adlar)):
             try:
-                okuma.json_yaz(klasor / DOCLING, {"tablolar": okuma.docling_oku(goruntuler)})
+                okuma.json_yaz(klasor / DOCLING, {"sayfalar": adlar, "tablolar": okuma.docling_oku(goruntuler)})
             except ImportError:
                 notlar.append("docling kurulu değil: ikinci okuma yok (uv sync --extra tarama)")
+            except Exception as e:  # noqa: BLE001 — model indirme/çalıştırma hatası: ikinci okuma isteğe bağlı
+                notlar.append(f"docling okuması başarısız ({type(e).__name__}: {e}): ikinci okuma yok"[:300])
         if bekleyen:
             return Sonuc("BEKLIYOR", bekleyen=bekleyen, notlar=notlar)
         ikinci = okuma.json_oku(klasor / DOCLING).get("tablolar")

@@ -83,6 +83,47 @@ def test_ikinci_okuma_uyusmazligi_teslimi_durdurur_dogrulaninca_gecer(tmp_path):
     assert donustur(k).durum == "TEMIZ"
 
 
+
+def test_docling_calisma_hatasi_teslimi_dusurmez(tmp_path, monkeypatch):
+    from tezgah import okuma
+
+    def patla(_):
+        raise RuntimeError("model indirilemedi")
+
+    monkeypatch.setattr(okuma, "docling_oku", patla)
+    k = siparis(tmp_path, "a_fiyat_listesi_tarama_s1.jpg")
+    satirlar = json.loads((VERI / "claude_a.json").read_text(encoding="utf-8"))
+    (k / "okuma_claude.json").write_text(json.dumps(
+        {"tablolar": [tablo(satirlar, "a_fiyat_listesi_tarama_s1")]}, ensure_ascii=False), encoding="utf-8")
+    s = donustur(k)
+    assert s.durum == "TEMIZ", s.bulgular
+    assert any("docling okuması başarısız" in n for n in s.notlar)
+
+
+def test_girdi_degisince_ikinci_okuma_yenilenir(tmp_path, monkeypatch):
+    from tezgah import okuma
+
+    cagri = []
+    monkeypatch.setattr(okuma, "docling_oku", lambda g: cagri.append([p.name for p in g]) or [])
+    k = siparis(tmp_path, "a_fiyat_listesi_tarama_s1.jpg")
+    (k / "okuma_docling.json").write_text(json.dumps({"sayfalar": ["eski.png"], "tablolar": []}), encoding="utf-8")
+    donustur(k)
+    assert len(cagri) == 1
+    assert json.loads((k / "okuma_docling.json").read_text(encoding="utf-8"))["sayfalar"] == cagri[0]
+    donustur(k)  # aynı girdi: yeniden okunmaz
+    assert len(cagri) == 1
+
+
+def test_proje_koku_calisma_klasorunden_bagimsiz(tmp_path, monkeypatch):
+    from tezgah import proje_koku
+
+    monkeypatch.delenv("TEZGAH_KOK", raising=False)
+    monkeypatch.chdir(tmp_path)
+    assert (proje_koku() / "pyproject.toml").is_file()
+    monkeypatch.setenv("TEZGAH_KOK", str(tmp_path))
+    assert proje_koku() == tmp_path
+
+
 def fatura():
     g = dogru("b_fatura")
     return tablo([g["basliklar"]] + [list(r) for r in g["satirlar"]])
