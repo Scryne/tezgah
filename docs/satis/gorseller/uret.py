@@ -149,9 +149,39 @@ body{{height:769px}}
 <div class=alt>Content pipelines · office automation · API integrations · alert bots</div></body>"""
 
 
+def trendyol_html():
+    once = [("Başlık", "İNCİLİ KOLYE"), ("Özellikler", "2 / 9 alan dolu"), ("Açıklama", "yok")]
+    sonra = [("Başlık", "Kadın El Yapımı İnci Kolye Deniz Kabuğu Charmlı İnce Zincir"), ("Özellikler", "9 / 9 alan dolu"),
+             ("Açıklama", "malzeme, ölçü, kullanım, bakım, paket")]
+    def kart(sinif, etiket, satirlar):
+        return (f"<div class='kart {sinif}'><div class=ust>{etiket}</div>"
+                + "".join(f"<div class=satir><i>{a}</i><b>{b}</b></div>" for a, b in satirlar) + "</div>")
+    return f"""<!doctype html><meta charset=utf-8>{ORTAK}<style>
+.sag{{position:relative;display:flex;flex-direction:column;gap:18px;justify-content:center;margin-top:-30px}}
+.kart{{border-radius:16px;padding:18px 22px;box-shadow:0 24px 50px rgba(0,0,0,.45)}}
+.kart.once{{background:#1B2638;border:1px solid rgba(255,255,255,.08);color:var(--soluk);width:470px;transform:rotate(-1.5deg)}}
+.kart.sonra{{background:var(--kagit);color:#1d2733;margin-left:60px}}
+.ust{{font:800 13px Inter;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}}
+.once .ust{{color:#7D8A9C}} .sonra .ust{{color:#1E7145}}
+.satir{{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:8px 0;border-top:1px solid rgba(128,128,128,.18);font-size:16px}}
+.satir i{{font-style:normal;font-size:14px;opacity:.75}} .satir b{{font-weight:600}}
+.once .satir b{{font-family:'JetBrains Mono';font-weight:500}}
+.sag .damga{{align-self:flex-end}}
+</style><body>
+<div><h1>Trendyol ürünleriniz <em>satışa hazır</em></h1>
+<ul><li>Başlık, açıklama ve eksik özellikler</li><li>Toplu yüklemeye hazır Excel</li><li>Bilmediğimi sorarım, uydurmam</li></ul></div>
+<div class=sag>{kart("once", "Önce", once)}{kart("sonra", "Sonra", sonra)}
+<span class=damga>✓ İlk ürünü ücretsiz düzenleyip gösteririm</span></div>
+<div class=alt>Takı · giyim · aksesuar · ev tekstili · Hepsiburada da olur</div></body>"""
+
+
+import sys
+
 with sync_playwright() as p:
     b = p.chromium.launch(executable_path=str(Path.home() / "AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe"))
-    for ad, html in [("kapak-donustur", donustur_html()), ("kapak-discord", discord_html()), ("kapak-otomasyon", otomasyon_html()), ("fiverr-gig", fiverr_html())]:
+    hepsi = [("kapak-donustur", donustur_html), ("kapak-discord", discord_html), ("kapak-otomasyon", otomasyon_html),
+             ("fiverr-gig", fiverr_html), ("kapak-trendyol", trendyol_html)]
+    for ad, html in [(a, f()) for a, f in hepsi if not sys.argv[1:] or a in sys.argv[1:]]:
         (OUT / f"{ad}.html").write_text(html, encoding="utf-8")
         s = b.new_page(viewport={"width": 1280, "height": 769 if ad.startswith("fiverr") else 720})
         s.goto((OUT / f"{ad}.html").as_uri()); s.wait_for_timeout(1500)
