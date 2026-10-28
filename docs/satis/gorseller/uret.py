@@ -175,12 +175,53 @@ def trendyol_html():
 <div class=alt>Takı · giyim · aksesuar · ev tekstili · Hepsiburada da olur</div></body>"""
 
 
+def portfolyo_trendyol_html():
+    """Temsili ürün; 'önce' sütunu 10-28'de Trendyol'da görülen gerçek kusur tipinden (büyük harf başlık, 2 alan, açıklama yok)."""
+    sonra_ozellik = [("Taş Cinsi", "İnci"), ("Renk", "Beyaz / Altın"), ("Materyal", "Paslanmaz Çelik"), ("Kaplama", "Altın Kaplama"),
+                     ("Zincir Uzunluğu", "45 cm"), ("Uzatma Zinciri", "5 cm"), ("Tarz", "Günlük"), ("Menşei", "TR"), ("Kutu Durumu", "Kutulu")]
+    once_ozellik = [("Renk", "Beyaz"), ("Menşei", "TR")]
+    tablo = lambda xs: "".join(f"<tr><td>{a}</td><td>{b}</td></tr>" for a, b in xs)
+    return f"""<!doctype html><meta charset=utf-8>{ORTAK}<style>
+body{{display:flex;flex-direction:column;justify-content:center;padding:44px 56px}}
+body>div.bas{{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 22px;align-self:stretch}}
+.bas h2{{font:800 30px 'Inter Tight'}} .bas span{{color:var(--soluk);font:600 15px Inter}}
+.iki{{display:grid;grid-template-columns:1fr 1.35fr;gap:26px}}
+.k{{border-radius:14px;padding:18px 20px}}
+.k.once{{background:#1B2638;border:1px solid rgba(255,255,255,.08);color:#C9D2DE}}
+.k.sonra{{background:var(--kagit);color:#1d2733}}
+.et{{font:800 12px Inter;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}}
+.once .et{{color:#7D8A9C}} .sonra .et{{color:#1E7145}}
+h3{{font:700 18px Inter;line-height:1.3;margin-bottom:12px}}
+.once h3{{font-family:'JetBrains Mono';font-weight:500;font-size:17px}}
+.alt-b{{font:700 12px Inter;text-transform:uppercase;letter-spacing:.06em;opacity:.6;margin:12px 0 6px}}
+table{{border-collapse:collapse;width:100%;font-size:13.5px}}
+td{{padding:5px 8px;border-top:1px solid rgba(128,128,128,.2)}} td:first-child{{opacity:.7;width:42%}}
+p.ac{{font-size:13.5px;line-height:1.5}}
+.yok{{font-family:'JetBrains Mono';font-size:14px;opacity:.7}}
+.sonra .cols{{display:grid;grid-template-columns:1fr 1fr;gap:18px}}
+.not{{margin-top:14px;font-size:13px;color:var(--soluk)}}
+</style><body>
+<div class=bas><h2>Trendyol ürün düzenleme · örnek çalışma</h2><span>Temsili ürün · bijuteri kolye</span></div>
+<div class=iki>
+<div class='k once'><div class=et>Önce</div><h3>İNCİLİ KOLYE</h3>
+<div class=alt-b>Özellikler · 2 / 9 alan</div><table>{tablo(once_ozellik)}</table>
+<div class=alt-b>Açıklama</div><p class=yok>— boş —</p></div>
+<div class='k sonra'><div class=et>Sonra</div><h3>Kadın El Yapımı İnci Kolye Deniz Kabuğu Charmlı İnce Zincir 45 cm</h3>
+<div class=cols><div><div class=alt-b>Özellikler · 9 / 9 alan</div><table>{tablo(sonra_ozellik)}</table></div>
+<div><div class=alt-b>Açıklama</div><p class=ac>El yapımı inci kolye, deniz kabuğu charmı ve ince zinciriyle günlük kullanıma uygun.<br>
+• Materyal: paslanmaz çelik zincir, altın kaplama<br>• Uzunluk: 45 cm + 5 cm uzatma zinciri<br>
+• Kullanım: suyla ve parfümle temastan kaçının<br>• Bakım: kuru, yumuşak bezle silin<br>• Paket: hediye kutusunda gönderilir</p></div></div></div>
+</div>
+<div class=not>Materyal ve ölçü gibi bilgiler satıcıdan alınır; bilinmeyen bilgi uydurulmaz. Teslim: toplu güncelleme Excel'i + kopyala-yapıştır metin.</div>
+</body>"""
+
+
 import sys
 
 with sync_playwright() as p:
     b = p.chromium.launch(executable_path=str(Path.home() / "AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe"))
     hepsi = [("kapak-donustur", donustur_html), ("kapak-discord", discord_html), ("kapak-otomasyon", otomasyon_html),
-             ("fiverr-gig", fiverr_html), ("kapak-trendyol", trendyol_html)]
+             ("fiverr-gig", fiverr_html), ("kapak-trendyol", trendyol_html), ("portfolyo-trendyol", portfolyo_trendyol_html)]
     for ad, html in [(a, f()) for a, f in hepsi if not sys.argv[1:] or a in sys.argv[1:]]:
         (OUT / f"{ad}.html").write_text(html, encoding="utf-8")
         s = b.new_page(viewport={"width": 1280, "height": 769 if ad.startswith("fiverr") else 720})

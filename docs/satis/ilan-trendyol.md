@@ -48,7 +48,8 @@ Mağaza bağlantınızı ya da düzenlenecek ürünlerin bağlantılarını gön
 | Detay | `10 ürünün başlık, açıklama ve özellik alanları; toplu güncelleme Excel'i` | `30 ürünün başlık, açıklama ve özellik alanları; toplu güncelleme Excel'i; mağaza geneli kısa kontrol notu` | `100 ürünün başlık, açıklama ve özellik alanları; toplu güncelleme Excel'i; mağaza geneli kontrol notu` |
 | Teslim | 1 gün | 2 gün | 4 gün |
 | Revizyon | 1 | 2 | 2 |
-| Fiyat | 500 TL | 1.250 TL | 3.500 TL |
+| Fiyat | 500 TL | 1.200 TL (açılır listede 1.250 yok) | 3.500 TL |
+| Site Denetimi | — | ✓ | ✓ |
 
 Fiyat gerekçesi: rakibin ürün başı ~100–150 TL'sinin altında (ürün başı 50 → 35 TL), çünkü yorumsuz yeni ilan; ilk 3–5 yorumdan
 sonra yükseltilir. İş Claude'da, Scryne'ın sipariş başı zamanı ~15 dk (yazışma + teslim).
