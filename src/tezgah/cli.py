@@ -102,6 +102,40 @@ def defter_ozet():
         typer.echo(f"ÖLDÜRME KRİTERİ: {OLDURME_GUN} günde sipariş yok, fiyat/paket/platform yeniden açılır.")
 
 
+trendyol_app = typer.Typer(no_args_is_help=True, help="Trendyol ürün düzenleme kiti (başlık, açıklama, özellik)")
+app.add_typer(trendyol_app, name="trendyol")
+
+
+@trendyol_app.command("ac")
+def trendyol_ac(klasor: Annotated[Path, typer.Argument(help="Sipariş klasörü (girdi/ altında müşterinin Excel'i)")]):
+    """Excel'den urunler.json ve Claude'un dolduracağı duzenleme_claude.json şablonunu yazar."""
+    from . import trendyol
+
+    try:
+        typer.echo(f"Şablon: {trendyol.ac(klasor)}")
+    except ValueError as e:
+        typer.echo(str(e))
+        raise typer.Exit(1) from None
+
+
+@trendyol_app.command("teslim")
+def trendyol_teslim(klasor: Annotated[Path, typer.Argument(help="Sipariş klasörü")]):
+    """Düzenlemeyi kontrol eder; temizse teslim/ altına Excel + kopyala-yapıştır metin yazar."""
+    from . import trendyol
+
+    s = trendyol.teslim(klasor)
+    if s.durum == "INCELE":
+        typer.echo(f"INCELE: {len(s.bulgular)} bulgu. Teslim dosyası yazılmadı.")
+        for b in s.bulgular:
+            typer.echo(f"  - {b}")
+        raise typer.Exit(1)
+    if s.durum == "BEKLIYOR":
+        typer.echo("BEKLIYOR: satıcıya sorulacaklar var. Mesaj:\n")
+        typer.echo(trendyol.soru_mesaji(s.sorular))
+        raise typer.Exit(2)
+    typer.echo("TEMIZ: " + ", ".join(str(p) for p in s.ciktilar))
+
+
 bionluk_app = typer.Typer(no_args_is_help=True, help="Bionluk panelini salt-okunur okur")
 app.add_typer(bionluk_app, name="bionluk")
 
