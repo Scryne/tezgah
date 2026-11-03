@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Freelance teslim kitleri: PDF/tarama -> Excel/Word, Discord bot paketi"
 requires-python = ">=3.12"
 dependencies = [
-    "typer>=0.12",
+    "typer>=0.27.3",
     "pdfplumber>=0.11",
     "pypdfium2>=4.30",
     "openpyxl>=3.1",
@@ -22,7 +22,7 @@ bionluk = ["playwright>=1.48"]
 tezgah = "tezgah.cli:app"
 
 [dependency-groups]
-dev = ["pytest>=8", "ruff>=0.6", "discord.py==2.7.1", "python-dotenv>=1.0"]
+dev = ["pytest>=9.2.0", "ruff>=0.17.3", "discord.py==2.7.1", "python-dotenv>=1.0"]
 
 [build-system]
 requires = ["hatchling"]
