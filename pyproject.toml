@@ -6,7 +6,7 @@ requires-python = ">=3.12"
 dependencies = [
     "typer>=0.27.3",
     "pdfplumber>=0.11",
-    "pypdfium2>=4.30",
+    "pypdfium2>=5.15.0",
     "openpyxl>=3.1",
     "python-docx>=1.1",
     "pyyaml>=6.0",
@@ -14,7 +14,7 @@ dependencies = [
 
 [project.optional-dependencies]
 # Taramada ikinci okuma; ağır (torch), CI'da kurulmaz
-tarama = ["docling>=2.0", "easyocr>=1.7"]
+tarama = ["docling>=2.148.0", "easyocr>=1.7"]
 # Bionluk panel okuyucu (tezgah bionluk); makinedeki Playwright Chromium kullanılır
 bionluk = ["playwright>=1.48"]
 
@@ -22,7 +22,7 @@ bionluk = ["playwright>=1.48"]
 tezgah = "tezgah.cli:app"
 
 [dependency-groups]
-dev = ["pytest>=9.2.0", "ruff>=0.17.3", "discord.py==2.7.1", "python-dotenv>=1.0"]
+dev = ["pytest>=9.2.0", "ruff>=0.17.4", "discord.py==2.7.1", "python-dotenv>=1.0"]
 
 [build-system]
 requires = ["hatchling"]
