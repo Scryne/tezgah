@@ -35,7 +35,7 @@ uv run tezgah defter ekle donustur 750 --paket standart
 uv run tezgah defter ozet
 ```
 
-Adım adım tarifler `.claude/skills/` altında: `donustur`, `bot-siparisi`, `istek-tara`.
+Adım adım tarifler `.claude/skills/` altında: `donustur`, `bot-siparisi`, `trendyol-siparisi`, `istek-tara`.
 
 ## Düzen
 
