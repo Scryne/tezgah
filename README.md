@@ -7,6 +7,7 @@ dakikalara indirir. Hedef sipariş başına 10–15 dakika insan işi.
 |---|---|---|
 | Dönüştürme | PDF/görsel → Excel (ve Word). Dijital PDF'i doğrudan okur. Taranmış sayfayı Claude okur, docling bağımsız ikinci okuma yapar, satır aritmetiği ve biçim kontrolü teslimi denetler | `tezgah donustur` |
 | Discord bot | Ticket, kayıt, moderasyon modüllü bot. Müşterinin `ayar.yaml`'ıyla zip'lenir | `tezgah bot` |
+| Trendyol düzenleme | Satıcının ürün Excel'inden başlık, açıklama ve özellik düzenleme şablonu açar; teslimde düzenlemeyi kontrol eder, değişen hücreleri boyanmış Excel + kopyala-yapıştır metin yazar | `tezgah trendyol` |
 | Defter | Teslim edilen sipariş, brüt/net gelir, yayından beri gün ve öldürme kriteri (30 gün, 0 sipariş) | `tezgah defter` |
 | Bionluk okuyucu | "Bana uygun alıcı istekleri" sayfasını salt-okunur çeker. Teklif vermez, mesaj atmaz | `tezgah bionluk` |
 
@@ -28,6 +29,8 @@ uv run tezgah donustur calisma/<klasor> --word
 #   INCELE   → rapor.md'deki bulgular doğrulanmadan teslim dosyası yazılmaz
 #   TEMIZ    → cikti/ altında Excel (ve Word)
 uv run tezgah bot calisma/<klasor>/ayar.yaml  # Discord kiti: müşteriye özel zip
+uv run tezgah trendyol ac calisma/<klasor>     # girdi/*.xlsx → urunler.json + duzenleme_claude.json
+uv run tezgah trendyol teslim calisma/<klasor> # TEMIZ → teslim/ altında Excel + urunler.md
 uv run tezgah defter ekle donustur 750 --paket standart
 uv run tezgah defter ozet
 ```
