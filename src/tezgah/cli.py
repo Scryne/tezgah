@@ -11,7 +11,7 @@ from . import proje_koku
 from .bot import paketle
 from .defter import OLDURME_GUN, Defter
 from .donustur import donustur as _donustur
-from .sayi import kucult
+from .sayi import bicimle, kucult
 
 _TR_ASCII = str.maketrans("çğıöşü", "cgiosu")
 
@@ -96,7 +96,7 @@ def defter_yayin(tarih: Annotated[str, typer.Argument(help="İlanların yayına 
 def defter_ozet():
     """Sipariş sayısı, brüt/net gelir, yayından beri gün ve öldürme kriteri."""
     o = Defter(DEFTER).ozet()
-    typer.echo(f"Sipariş: {o.siparis} · brüt {o.brut:,.2f} TL · net {o.net:,.2f} TL")
+    typer.echo(f"Sipariş: {o.siparis} · brüt {bicimle(o.brut)} TL · net {bicimle(o.net)} TL")
     typer.echo(f"Yayın: {o.yayin or 'girilmedi'}" + (f" · {o.gun}. gün" if o.gun is not None else ""))
     if o.oldurme:
         typer.echo(f"ÖLDÜRME KRİTERİ: {OLDURME_GUN} günde sipariş yok, fiyat/paket/platform yeniden açılır.")

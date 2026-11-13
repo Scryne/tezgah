@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from difflib import SequenceMatcher
 from itertools import permutations
 
-from .sayi import coz, kucult
+from .sayi import bicimle, coz, kucult
 
 
 @dataclass
@@ -122,7 +122,7 @@ def aritmetik(tablo: dict) -> list[Bulgu]:
                 veri_satirlari.append(i)
                 if not _yakin(r[a] * r[b], r[c]):
                     bulgular.append(Bulgu("carpim", *k, i, c, satirlar[i][c],
-                                          f"{satirlar[i][a]} × {satirlar[i][b]} = {r[a] * r[b]:,.2f} tutmuyor"))
+                                          f"{satirlar[i][a]} × {satirlar[i][b]} = {bicimle(r[a] * r[b])} tutmuyor"))
 
     # Toplam satırları: etiketli satırın son sayısı
     ara = kdv = None
@@ -142,7 +142,7 @@ def aritmetik(tablo: dict) -> list[Bulgu]:
         elif "toplam" in etiket and "genel" not in etiket and en_iyi and veri_satirlari:
             beklenen, ara = sum(sayilar[v][en_iyi[2]] for v in veri_satirlari), deger
         if beklenen is not None and not _yakin(beklenen, deger):
-            bulgular.append(Bulgu("toplam", *k, i, j, r[j], f"hesaplanan {beklenen:,.2f}"))
+            bulgular.append(Bulgu("toplam", *k, i, j, r[j], f"hesaplanan {bicimle(beklenen)}"))
     return bulgular
 
 
