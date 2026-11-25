@@ -5,6 +5,12 @@ updates:
     schedule: { interval: "weekly" }
     groups: { tum: { patterns: ["*"] } }
     open-pull-requests-limit: 3
+    # docling (tarama ekstrası) typer<0.28 sabitliyor; typer 0.28+ önerisi çözümsüz kalıp
+    # haftalık "Dependabot Updates" işini kırmızıya düşürüyordu (2026-11-17, 11-24).
+    # docling sınırı kaldırınca bu blok silinir.
+    ignore:
+      - dependency-name: "typer"
+        versions: [">=0.28"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule: { interval: "weekly" }
