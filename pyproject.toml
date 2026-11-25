@@ -5,7 +5,7 @@ description = "Freelance teslim kitleri: PDF/tarama -> Excel/Word, Discord bot p
 requires-python = ">=3.12"
 dependencies = [
     "typer>=0.27.3",
-    "pdfplumber>=0.11",
+    "pdfplumber>=0.11.11",
     "pypdfium2>=5.15.2",
     "openpyxl>=3.1",
     "python-docx>=1.1",
